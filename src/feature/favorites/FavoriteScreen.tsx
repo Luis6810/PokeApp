@@ -1,12 +1,17 @@
-import { Text, FlatList, Pressable, Image } from "react-native";
+import { Text, FlatList, Pressable, Image, TouchableWithoutFeedback } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { usePokemonFavoritesState } from "./favorites.state";
 import { Routes } from "../../shared/navigation/routes";
 import FastImage from "react-native-fast-image";
+import { useEffect } from "react";
 
 export default function FavoritesScreen() {
   const navigation = useNavigation<any>();
-  const favorites = usePokemonFavoritesState((s) => s.favorites);
+  const { favorites, loadFavorites } = usePokemonFavoritesState();
+
+  useEffect(() => {
+    loadFavorites();
+  }, []);
 
   if (favorites.length === 0) {
     return <Text>No favorite Pokémon yet</Text>;
@@ -18,11 +23,11 @@ export default function FavoritesScreen() {
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
         <Pressable
-          onPress={() =>
-            navigation.navigate(Routes.PokemonDetail, {
-              url: item.url,
-            })
-          }
+          // onPress={() =>
+          //   navigation.navigate(Routes.PokemonDetail, {
+          //     url: item.url,
+          //   })
+          // }
         >
           {item.image && (
             <Image

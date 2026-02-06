@@ -1,5 +1,5 @@
-import PokemonsScreen from "../../feature/pokemons/screens/PokemonListScreen";
-import PokemonDetailScreen from "../../feature/pokemons/screens/PokemonDetailScreen";
+import PokemonsScreen from "../../feature/pokemons/PokemonListScreen";
+import PokemonDetailScreen from "../../feature/pokemon-detail/PokemonDetailScreen";
 import { Routes } from "./routes";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 

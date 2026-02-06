@@ -1,6 +1,9 @@
 import { create } from "zustand";
-import { PokemonDTO } from "../models/pokemon-detail.dto";
-import PokemonService from "../api/pokemon.service";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { PokemonDTO } from "./pokemon-detail.dto";
+import PokemonService from "./podemon-detailo.service";
+
+const STORAGE_KEY_PREFIX = "pokemon_detail_";
 
 type PokemonDetailState = {
   pokemon: PokemonDTO | null;
@@ -21,10 +24,18 @@ export const usePokemonDetailState = create<PokemonDetailState>((set) => ({
       set({ isLoading: true, error: null });
 
       const id = Number(url.split("/").filter(Boolean).pop());
+      const storageKey = `${STORAGE_KEY_PREFIX}${id}`;
+
+      const cached = await AsyncStorage.getItem(storageKey);
+      if (cached) {
+        const cachedPokemon: PokemonDTO = JSON.parse(cached);
+        set({ pokemon: cachedPokemon });
+      }
 
       const pokemon = await PokemonService.GetPokemonById(id);
-
       set({ pokemon });
+
+      await AsyncStorage.setItem(storageKey, JSON.stringify(pokemon));
     } catch (e) {
       set({ error: "Failed to load Pokémon" });
     } finally {

@@ -8,7 +8,7 @@ npm expo prebuild
 npm start -d
 
 ### DTO from API
-For models from api it was used https://app.quicktype.io/ to easily and fast create my dto
+Para los modelos de la api fue usada la herramienta web https://app.quicktype.io/ para fácilmente creart los dto a partir de json
 
 
 ### Set Java Home
@@ -20,3 +20,10 @@ export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 export PATH=$JAVA_HOME/bin:$PATH
 
 En Windows hay que abrir las Variables de entorno y agregar una variable JAVA_HOME con valor de la ruta de instalación de Java17. Al mismo tiempo hay que agregar %JAVA_HOME%\bin al path.
+
+### Requerimientos
+Node v24.12.0
+openjdk 17.0.18 2026-01-20
+npm 11.6.2
+
+### Arquitectura
